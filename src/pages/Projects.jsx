@@ -24,9 +24,11 @@ const Projects = () => {
   ]
 
   return (
-    <section className="mx-auto max-w-6xl px-6 py-20">
-      <h1>Projects</h1>
-      <p>
+    <section className="mx-auto max-w-6xl space-y-6 px-6 py-20">
+      <h1 className="text-4xl font-bold" font-bold>
+        Projects
+      </h1>
+      <p className="text-lg">
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi, optio.
       </p>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -50,7 +52,7 @@ const Projects = () => {
           )
         })}
       </div>
-    </section >
+    </section>
   )
 }
 
