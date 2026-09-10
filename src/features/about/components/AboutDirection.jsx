@@ -1,6 +1,6 @@
-const AboutDirection = () => {
+const AboutDirection = ({ isOpen, onToggle }) => {
   return (
-    <section>
+    <section onClick={() => onToggle("direction")}>
       <h2>Where I'm Going</h2>
 
       <p>
@@ -8,14 +8,14 @@ const AboutDirection = () => {
         particularly in the React ecosystem and modern web development.
       </p>
 
-      <p>
+      <p className={isOpen ? "block" : "hidden"}>
         At the same time, I'm expanding my knowledge beyond the frontend. My
         long-term goal is to become a full-stack developer who can understand
         and build across the entire application — from the user interface and
         APIs to the data and backend systems behind it.
       </p>
 
-      <p>
+      <p className={isOpen ? "block" : "hidden"}>
         I'm also interested in how modern development is evolving, including the
         growing role of AI and new tools that help developers build better
         products.

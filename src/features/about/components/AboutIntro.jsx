@@ -1,6 +1,6 @@
-const AboutIntro = () => {
+const AboutIntro = ({ isOpen, onToggle }) => {
   return (
-    <section>
+    <section onClick={() => onToggle("intro")}>
       <h2>Who I am</h2>
 
       <p>
@@ -8,7 +8,7 @@ const AboutIntro = () => {
         modern web experiences.
       </p>
 
-      <p>
+      <p className={isOpen ? "block" : "hidden"}>
         I was initially drawn to frontend development because I enjoy the
         creative side of building for the web — taking an idea and turning it
         into something people can see and interact with. Over time, that
