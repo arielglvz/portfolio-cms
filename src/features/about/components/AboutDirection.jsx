@@ -4,23 +4,20 @@ const AboutDirection = ({ isOpen, onToggle }) => {
       <h2>Where I'm Going</h2>
 
       <p>
-        Right now, my focus is on becoming a stronger frontend developer,
-        particularly in the React ecosystem and modern web development.
+        I'm looking to grow as a frontend developer while contributing to
+        products that solve real problems.
       </p>
 
       <p className={isOpen ? "block" : "hidden"}>
-        At the same time, I'm expanding my knowledge beyond the frontend. My
-        long-term goal is to become a full-stack developer who can understand
-        and build across the entire application — from the user interface and
-        APIs to the data and backend systems behind it.
-      </p>
-
-      <p className={isOpen ? "block" : "hidden"}>
-        I'm also interested in how modern development is evolving, including the
-        growing role of AI and new tools that help developers build better
-        products.
+        I'm looking for opportunities where I can continue strengthening my
+        frontend skills, work with experienced developers, and contribute to
+        meaningful products. I'm especially interested in teams that value
+        collaboration, clean development practices, and continuous learning. My
+        goal is to keep growing technically while becoming a developer who can
+        take greater ownership of the features and products I build.
       </p>
     </section>
   )
 }
 export default AboutDirection
+GIT 

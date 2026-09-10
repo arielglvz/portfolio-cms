@@ -3,21 +3,18 @@ const AboutApproach = ({ isOpen, onToggle }) => {
     <section onClick={() => onToggle("approach")}>
       <h2>How I Build</h2>
 
-      <p>I enjoy building things that have a purpose.</p>
-
-      <p className={isOpen ? "block" : "hidden"}>
-        Many of the ideas I work on start with a simple question: "Is there a
-        better way to solve this problem?"
+      <p>
+        I approach development by breaking problems down, understanding the why
+        behind the solution, and building step by step.
       </p>
 
       <p className={isOpen ? "block" : "hidden"}>
-        I like exploring an idea, breaking it down into smaller problems, and
-        turning it into a practical application.
-      </p>
-
-      <p className={isOpen ? "block" : "hidden"}>
-        For me, development is a continuous process of thinking, building,
-        learning, and improving.
+        I value clean, maintainable code and practical solutions over
+        unnecessary complexity. When working with something unfamiliar, I take
+        the time to understand it, experiment, and learn from feedback. I also
+        believe good development is more than writing code — it's about
+        understanding the user, communicating with the team, and continuously
+        improving the product.
       </p>
     </section>
   )
