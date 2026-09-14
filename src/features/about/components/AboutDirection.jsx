@@ -20,4 +20,3 @@ const AboutDirection = ({ isOpen, onToggle }) => {
   )
 }
 export default AboutDirection
-GIT 
