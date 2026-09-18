@@ -1,21 +1,31 @@
 import { useState } from "react"
+import { login } from "../services/authService"
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   })
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
 
   // const handleChange = (e) => {
   //   setFormData((prev) => ({ ...prev, }))
   // }
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault()
+    setLoading(true)
 
-    const { email, password } = formData
+    try {
+      const { email, password } = formData
 
-    console.log("test value: ", email, password)
+      login(email, password)
+    } catch (err) {
+      console.log(err)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
