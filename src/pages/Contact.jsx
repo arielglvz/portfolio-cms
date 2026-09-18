@@ -1,5 +1,5 @@
-import ContactIntro from "../features/contact/components/ContactIntro"
-import ContactMethods from "../features/contact/components/ContactMethods"
+import ContactIntro from "@/features/contact/components/ContactIntro"
+import ContactMethods from "@/features/contact/components/ContactMethods"
 
 const Contact = () => {
   return (

@@ -1,5 +1,5 @@
+import { login } from "@/features/auth/services/authService"
 import { useState } from "react"
-import { login } from "../services/authService"
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
