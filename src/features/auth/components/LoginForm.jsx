@@ -20,9 +20,9 @@ const LoginForm = () => {
     try {
       const { email, password } = formData
 
-      login(email, password)
+      await login(email, password)
     } catch (err) {
-      console.log(err)
+      console.error(err)
     } finally {
       setLoading(false)
     }

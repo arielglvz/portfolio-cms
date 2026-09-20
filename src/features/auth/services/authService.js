@@ -1,11 +1,14 @@
-export const login = async (email, password) => {
-  try {
-    const result = await Promise.reject("Login failed")
+import { supabase } from "@/lib/supabase"
 
-    console.log(result)
-  } catch (err) {
-    console.error(err)
-  } finally {
-    console.log("function finished!")
+export const login = async (email, password) => {
+  const response = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  })
+
+  if (response.error) {
+    throw response.error
   }
+
+  return response
 }
