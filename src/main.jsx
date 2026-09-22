@@ -14,6 +14,9 @@ import About from "./pages/About.jsx"
 import Experience from "./pages/Experience.jsx"
 import Blog from "./pages/Blog.jsx"
 
+import Dashboard from "@/pages/Dashboard"
+import Login from "@/pages/Login"
+
 const routes = [
   {
     path: "/",
@@ -44,6 +47,14 @@ const routes = [
         element: <Contact />,
       },
     ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
   },
 ]
 
