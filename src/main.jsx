@@ -16,6 +16,8 @@ import Blog from "./pages/Blog.jsx"
 
 import Dashboard from "@/pages/Dashboard"
 import Login from "@/pages/Login"
+import { AuthProvider } from "@/features/auth/context/AuthProvider"
+import AdminLayout from "@/app/layouts/AdminLayout"
 
 const routes = [
   {
@@ -49,12 +51,17 @@ const routes = [
     ],
   },
   {
-    path: "/login",
-    element: <Login />,
+    element: <AdminLayout />,
+    children: [
+      {
+        path: "/dashboard",
+        element: <Dashboard />,
+      },
+    ],
   },
   {
-    path: "/dashboard",
-    element: <Dashboard />,
+    path: "/login",
+    element: <Login />,
   },
 ]
 
@@ -62,6 +69,8 @@ const router = createBrowserRouter(routes)
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>,
 )

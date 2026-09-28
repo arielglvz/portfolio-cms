@@ -10,7 +10,7 @@ export const usePosts = () => {
     const controller = new AbortController()
     const { signal } = controller
 
-    console.log(signal)
+    // console.log(signal)
     const fetchData = async () => {
       try {
         const result = await getPosts(signal)

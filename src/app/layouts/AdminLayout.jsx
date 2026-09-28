@@ -1,0 +1,15 @@
+import { useAuth } from "@/features/auth/hooks/useAuth"
+import { Navigate, Outlet } from "react-router-dom"
+
+const AdminLayout = () => {
+  const { user, loading } = useAuth()
+
+  if (loading) return <div>Loading...</div>
+
+  if (!user) {
+    return <Navigate to="/login" replace />
+  }
+
+  return <Outlet />
+}
+export default AdminLayout
