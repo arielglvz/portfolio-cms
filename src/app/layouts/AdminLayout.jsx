@@ -1,5 +1,5 @@
 import { useAuth } from "@/features/auth/hooks/useAuth"
-import { Navigate, Outlet } from "react-router-dom"
+import { Link, Navigate, Outlet } from "react-router-dom"
 
 const AdminLayout = () => {
   const { user, loading } = useAuth()
@@ -10,6 +10,14 @@ const AdminLayout = () => {
     return <Navigate to="/login" replace />
   }
 
-  return <Outlet />
+  return (
+    <>
+      <nav>
+        <Link to="/dashboard">Dashboard</Link>
+        <Link to="/dashboard/projects">Projects</Link>
+      </nav>
+      <Outlet />
+    </>
+  )
 }
 export default AdminLayout

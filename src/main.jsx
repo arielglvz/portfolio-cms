@@ -1,10 +1,12 @@
 import { StrictMode } from "react"
 import { createRoot } from "react-dom/client"
+import { AuthProvider } from "@/features/auth/context/AuthProvider"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import "./index.css"
 
 // Layouts
 import MainLayout from "./app/layouts/MainLayout.jsx"
+import AdminLayout from "@/app/layouts/AdminLayout"
 
 // Pages
 import Home from "./pages/Home.jsx"
@@ -14,10 +16,9 @@ import About from "./pages/About.jsx"
 import Experience from "./pages/Experience.jsx"
 import Blog from "./pages/Blog.jsx"
 
-import Dashboard from "@/pages/Dashboard"
 import Login from "@/pages/Login"
-import { AuthProvider } from "@/features/auth/context/AuthProvider"
-import AdminLayout from "@/app/layouts/AdminLayout"
+import Dashboard from "@/pages/Dashboard"
+import ProjectAdmin from "@/pages/admin/Projects"
 
 const routes = [
   {
@@ -56,6 +57,10 @@ const routes = [
       {
         path: "/dashboard",
         element: <Dashboard />,
+      },
+      {
+        path: "/dashboard/projects",
+        element: <ProjectAdmin />,
       },
     ],
   },
