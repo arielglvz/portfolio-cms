@@ -1,19 +1,22 @@
-import { createProject } from "@/features/projects/services/projectService"
+import {
+  createProject,
+  updateProject,
+} from "@/features/projects/services/projectService"
 import { useState } from "react"
 
-const ProjectForm = ({ onProjectCreated }) => {
+const ProjectForm = ({ project, onProjectCreated }) => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
-  const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    technologies: "",
-    url: "",
-    github_url: "",
-    featured: false,
-    display_order: 1,
-  })
+  const [formData, setFormData] = useState(() => ({
+    title: project?.title ?? "",
+    description: project?.description ?? "",
+    technologies: project?.technologies?.join(", ") ?? "",
+    url: project?.url ?? "",
+    github_url: project?.github_url ?? "",
+    featured: project?.featured ?? false,
+    display_order: project?.display_order ?? 1,
+  }))
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target
@@ -22,8 +25,6 @@ const ProjectForm = ({ onProjectCreated }) => {
       ...prev,
       [name]: type === "checkbox" ? checked : value,
     }))
-
-    console.log(name, type, value)
   }
 
   const handleSubmit = async (e) => {
@@ -46,21 +47,13 @@ const ProjectForm = ({ onProjectCreated }) => {
         display_order: Number(formData.display_order),
       }
 
-      const project = await createProject(projectData)
+      const savedProject = project
+        ? await updateProject(project.id, projectData)
+        : await createProject(projectData)
 
       await onProjectCreated()
 
-      setFormData({
-        title: "",
-        description: "",
-        technologies: "",
-        url: "",
-        github_url: "",
-        featured: false,
-        display_order: 1,
-      })
-
-      console.log("Created project: ", project)
+      console.log("Saved project: ", savedProject)
     } catch (err) {
       setError(err.message)
     } finally {
@@ -74,6 +67,7 @@ const ProjectForm = ({ onProjectCreated }) => {
         <label htmlFor="title">Project Title</label>
         <input
           id="title"
+          className="border"
           name="title"
           value={formData.title}
           onChange={handleChange}
@@ -85,6 +79,7 @@ const ProjectForm = ({ onProjectCreated }) => {
         <label htmlFor="technologies">Technologies (comma-separated)</label>
         <input
           id="technologies"
+          className="border"
           name="technologies"
           value={formData.technologies}
           onChange={handleChange}
@@ -97,6 +92,7 @@ const ProjectForm = ({ onProjectCreated }) => {
         <label htmlFor="url">Project URL</label>
         <input
           id="url"
+          className="border"
           name="url"
           type="url"
           value={formData.url}
@@ -108,6 +104,7 @@ const ProjectForm = ({ onProjectCreated }) => {
         <label htmlFor="github_url">GitHub URL</label>
         <input
           id="github_url"
+          className="border"
           name="github_url"
           type="url"
           value={formData.github_url}
@@ -119,6 +116,7 @@ const ProjectForm = ({ onProjectCreated }) => {
         <label htmlFor="featured">
           <input
             id="featured"
+            className="border"
             name="featured"
             type="checkbox"
             checked={formData.featured}
@@ -132,6 +130,7 @@ const ProjectForm = ({ onProjectCreated }) => {
         <label htmlFor="display_order">Display order</label>
         <input
           id="display_order"
+          className="border"
           name="display_order"
           type="number"
           min="1"
@@ -142,7 +141,13 @@ const ProjectForm = ({ onProjectCreated }) => {
       </div>
 
       <button type="submit" disabled={loading}>
-        {loading ? "Creating..." : "Create Project"}
+        {loading
+          ? project
+            ? "Saving..."
+            : "Creating..."
+          : project
+            ? "Save Changes"
+            : "Create Project"}
       </button>
 
       {error && <p role="alert">{error}</p>}
