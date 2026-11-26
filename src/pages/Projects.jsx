@@ -1,29 +1,30 @@
 import ProjectCard from "@/features/projects/components/ProjectCard"
+import { getProjects } from "@/features/projects/services/projectService"
+import { useEffect, useState } from "react"
 
 const Projects = () => {
-  const projects = [
-    {
-      title: "AiChieve",
-      description: "An AI-powered goal planning application.",
-      technologies: ["React", "Firebase", "OpenAI", "Tailwind"],
-    },
-    {
-      title: "TODO-AI",
-      description: "An AI-powered goal planning application.",
-      technologies: [
-        "React",
-        "Redux",
-        "AppWrite",
-        "Google Generative AI",
-        "Tailwind",
-      ],
-    },
-    {
-      title: "Apteum Website - Rework",
-      description: "Reworked the website from the original Apteum website.",
-      technologies: ["React", "Tailwind"],
-    },
-  ]
+  const [projects, setProjects] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const [selectedProject, setSelectedProject] = useState(null)
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const data = await getProjects()
+
+        if (error) throw error
+
+        setProjects(data ?? [])
+      } catch (err) {
+        console.error(err)
+        setError(err.message)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    getData()
+  }, [])
 
   return (
     <section className="mx-auto max-w-6xl space-y-6 px-6 py-20">
@@ -31,19 +32,29 @@ const Projects = () => {
       <p className="text-lg">
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi, optio.
       </p>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {projects.map((project) => {
-          const { technologies } = project
-          return (
-            <ProjectCard
-              key={project.title}
-              title={project.title}
-              description={project.description}
-              technologies={technologies}
-            />
-          )
-        })}
-      </div>
+
+      {isLoading ? (
+        <p>Loading projects...</p>
+      ) : error ? (
+        <p className="text-red-500 text-sm">{error}</p>
+      ) : projects.length === 0 ? (
+        <p>No projects available yet.</p>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {projects.map((project) => {
+            const { technologies } = project
+
+            return (
+              <ProjectCard
+                key={project.id}
+                title={project.title}
+                description={project.description}
+                technologies={technologies}
+              />
+            )
+          })}
+        </div>
+      )}
     </section>
   )
 }
